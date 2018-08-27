@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.net.URISyntaxException;
 
 public class StreamCreated {
 
@@ -30,7 +31,7 @@ public class StreamCreated {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         Stream<String> words = Stream.of("aa", "bbb", "cccc", "m", "nnnnnnn", "xx", "y", "zzz");
         show("words", words);
 
@@ -50,7 +51,7 @@ public class StreamCreated {
         Stream<BigInteger> integers = Stream.iterate(BigInteger.ONE, n -> n.add(BigInteger.ONE));
         show("integers", integers);
 
-        try(Stream<String> lines = Files.lines(Paths.get(StreamTest.class.getResource("words.txt").getPath()), StandardCharsets.UTF_8)) {
+        try(Stream<String> lines = Files.lines(Paths.get(StreamTest.class.getResource("words.txt").toURI()), StandardCharsets.UTF_8)) {
             show("lines", lines);
         }
     }
